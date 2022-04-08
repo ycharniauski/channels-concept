@@ -1,6 +1,3 @@
-import { createChannelKey } from "../channelsMgr"
-
-
 const Chart = (props) => {
     const { pair } = props
 
