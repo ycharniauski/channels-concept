@@ -1,9 +1,12 @@
+import { createChannelKey } from "../channelsMgr"
+
+
 const Chart = (props) => {
     const { pair } = props
 
-    useChannel({ chan: 'candles', symbol: pair })
-    useChannel({ chan: 'orders', symbol: pair })
-    useChannel({ chan: 'liqudations', symbol: pair })
+    useChannel(() => ({ chan: 'candles', symbol: pair }), [pair])
+    useChannel(() => ({ chan: 'orders', symbol: pair }), [pair])
+    useChannel(() => ({ chan: 'liquidation', symbol: pair }), [pair])
 
     return (<div>
         ..... 

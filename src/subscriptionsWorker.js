@@ -1,27 +1,27 @@
 
-import { createChannelKey, channelsMgr } from "./channelsMgr"
+import { channelsMgr } from "./channelsMgr"
 import { CHANNEL_STATUSES } from "./channelsMgr"
 
 function* refreshSubscriptionsWorker() {
     const channels = channelsMgr.getChannels()
+
     _forEach(channels, (chan) => {
         const { registered, status } = chan
         if (registered > 0 && status === CHANNEL_STATUSES.NONE) {
-            const { options } = chan
             chan.status = CHANNEL_STATUSES.SUBSCRIBING
-            yield put(subscribeAction(options))
+            yield put({ type: 'WS_REQUEST_SUBSCRIBE', payload: chan.key })
         } if (registered === 0 && status === CHANNEL_STATUSES.SUBSCRIBED) {
-            const { chanId } = chan
             chan.status = CHANNEL_STATUSES.UNSUBSCRIBING
-            yield put(unsubscribeAction(chanId))
+            yield put({ type: 'WS_REQUEST_UNSUBSCRIBE', payload: chan.chanId })
         }
     })
-    channelsMgr.clearUnusedChannels()
+
+    channelsMgr.removeUnusedChannels()
 }
 
-function* eventSubscribeWorker({ options }) {
+function* eventSubscribeWorker({ key }) {
     const channels = channelsMgr.getChannels()
-    const chan = channels[createChannelKey(options)]
+    const chan = channels[key]
     chan.status = CHANNEL_STATUSES.SUBSCRIBED
     yield refreshSubscriptionsWorker()
 }
