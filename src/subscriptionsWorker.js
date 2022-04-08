@@ -26,7 +26,7 @@ function* eventSubscribeWorker({ key }) {
     yield refreshSubscriptionsWorker()
 }
 
-function eventUnsubscribeWorker({ chanId }) {
+function* eventUnsubscribeWorker({ chanId }) {
     const chan = channelsMgr.getChanById(chanId)
     chan.status = CHANNEL_STATUSES.NONE
     yield refreshSubscriptionsWorker()
@@ -35,5 +35,5 @@ function eventUnsubscribeWorker({ chanId }) {
 export function* init() {
     yield takeEvery('WS_EVENT_SUBSCRIBE', eventSubscribeWorker)
     yield takeEvery('WS_EVENT_UNSUBSCRIBE', eventUnsubscribeWorker)
-    yield takeEvery('EVENT_SUBSCRIBING', refreshSubscriptionsWorker)
+    yield takeEvery('REFRESH_SUBSCRIBTIONS', refreshSubscriptionsWorker)
 }
