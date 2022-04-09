@@ -3,7 +3,6 @@ export const CHANNEL_STATUSES = {
     SUBSCRIBING: 'SUBSCRIBING',
     SUBSCRIBED: 'SUBSCRIBED',
     UNSUBSCRIBING: 'UNSIBSRIBING',
-    FAILED: 'FAILED'
 }
 
 export const createChannelKey = (options) => JSON.stringify(_sort(options))
