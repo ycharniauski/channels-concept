@@ -29,7 +29,7 @@ export const ChannelsMgr = () => {
         },
         removeUnusedChannels: () => {
             channels = _omitBy(channels, ({ registered, status }) => (
-                registered > 0 || status !== CHANNEL_STATUSES.NONE
+                !(registered === 0 && status === CHANNEL_STATUSES.NONE)
             ))
         }
     }
