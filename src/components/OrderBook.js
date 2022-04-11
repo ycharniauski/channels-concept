@@ -1,3 +1,5 @@
+import useChannel from "../hooks/useChannel"
+
 const OrderBook = (props) => {
     const { pair } = props
 

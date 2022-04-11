@@ -1,6 +1,6 @@
-import useChannel from '../useChannel'
+import useChannel from "../hooks/useChannel"
 
-const UseStatusChannel = ({ pair }) => {
+const CandlesChannel = ({ pair }) => {
     useChannel(() => ({ chan: 'candles', symbol: pair }), [pair])
 }
 
@@ -15,7 +15,7 @@ export class SomeLegacyComponent extends React.PureCompnent {
         const { pair } = this.props
         return (
             <>
-                <UseStatusChannel pair={pair} />
+                <CandlesChannel pair={pair} />
                 <div>...</div>
             </>
         )

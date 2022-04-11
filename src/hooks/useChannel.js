@@ -1,8 +1,8 @@
-import { createChannelKey, channelsMgr } from './channelsMgr'
+import { createChannelKey, channelsMgr } from '../lib/channelsMgr'
 
 const refhresSubscriptions = { type: 'REFRESH_SUBSCRIPTIONS' }
 
-export const useChannel = (callback, deps) => {
+const useChannel = (callback, deps) => {
     useEffect(() => {
         const options = callback()
         const key = createChannelKey(options)
@@ -16,3 +16,5 @@ export const useChannel = (callback, deps) => {
         }
     }, deps)
 }
+
+export default useChannel

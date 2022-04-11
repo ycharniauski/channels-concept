@@ -1,3 +1,5 @@
+import useChannel from "../hooks/useChannel"
+
 const Chart = (props) => {
     const { pair } = props
 
